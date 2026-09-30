@@ -59,7 +59,7 @@ The `action` parameter is optional because SOAP 1.2 carries the action in the `C
 ### 4. Behavior
 
 1. Outbound security policies configured on the client are applied to the SOAP envelope.
-2. An HTTP POST request is created with the appropriate content type (`text/xml` for SOAP 1.1, `application/soap+xml` for SOAP 1.2), the SOAP action header, and any custom headers.
+2. An HTTP POST request is created with the appropriate content type and action placement: `text/xml` with a separate `SOAPAction` HTTP header for SOAP 1.1, or `application/soap+xml` with the action as a `Content-Type` parameter for SOAP 1.2. Any custom headers are also included.
 3. The request is sent to the server.
 4. If the HTTP client returns an error (connection failure, timeout, etc.), an `Error` is returned with the client error message.
 5. If the HTTP response status code is outside the 2xx range:
